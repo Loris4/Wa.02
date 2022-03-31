@@ -1,18 +1,31 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+/* eslint-disable */
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+  data: function() {
+    return {
+      ime: "Loris",
+      prezime: "Lukić",
+      commits: [],
+    };
+  },
+  async mounted() {
+    let rezultat0 = await fetch("https://api.agify.io?name=michael");
+    let rezultat1 = await fetch("https://api.genderize.io?name=peter");
+    let rezultat2 = await fetch("https://api.nationalize.io?name=michael");
+    
+    let podaci = await rezultat0.json();
+    console.log(rezultat0);
+    console.log(rezultat1);
+    console.log(rezultat2);
+  },
+};
 </script>
