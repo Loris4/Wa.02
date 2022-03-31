@@ -1,15 +1,15 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="6" md="3"> </v-col>
+      <v-col cols="13" sm="5" md="3"> </v-col>
       <v-form>
         <v-text-field label="Regular" v-model="ime"></v-text-field>
         <v-btn @click="getData"> Submit </v-btn>
         <v-data-table
           :headers="headers"
           :items="items"
-          :items-per-page="9"
-          class="elevation-1"
+          :items-per-page="5"
+          class="elevation-5"
         ></v-data-table>
       </v-form>
     </v-row>
@@ -27,27 +27,27 @@ export default {
       items: [],
       headers: [
         {
-          text: "Ime",
-          align: "start",
-          sortable: false,
+          text: "IME",
+          align: "middle",
+          sortable: true,
           value: "ime",
         },
         {
-          text: "Vjerojatnost",
+          text: "VJEROJATNOST",
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "vjerojatnost",
         },
         {
-          text: "Godine",
-          align: "start",
+          text: "GODINE",
+          align: "middle",
           sortable: true,
           value: "godine",
         },
         {
-          text: "Spol",
+          text: "SPOL",
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "spol",
         },
       ],
@@ -67,10 +67,10 @@ export default {
       let rezultati3 = await podatci3.json();
 
       let temp = {
-        ime: rezultati.ime,
+        ime: rezultati.name,
         godine: rezultati.age,
-        spol: rezultati.gender,
-        vjerojatnost: rezultati.probability,
+        spol: rezultati2.gender,
+        vjerojatnost: rezultati2.probability,
       };
       this.items.push(temp);
 
