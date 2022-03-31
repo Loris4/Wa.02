@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="6" md="3"> </v-col>
       <v-form>
-        <v-text-field label="Regular" v-model="name"></v-text-field>
+        <v-text-field label="Regular" v-model="ime"></v-text-field>
         <v-btn @click="getData"> Submit </v-btn>
         <v-data-table
           :headers="headers"
@@ -20,12 +20,11 @@
 /* eslint-disable */
 
 export default {
-  name: 'HomeView',
+  ime: 'HomeView',
   data: function() {
     return {
-      ime: "Loris",
-      prezime: "Lukić",
-      commits: [],
+      ime: "",
+      items: [],
       headers: [
         {
           text: "Ime",
@@ -54,17 +53,31 @@ export default {
       ],
 
     };
-
   },
-  async mounted() {
-    let rezultat0 = await fetch("https://api.agify.io?name=michael");
-    let rezultat1 = await fetch("https://api.genderize.io?name=peter");
-    let rezultat2 = await fetch("https://api.nationalize.io?name=michael");
-    
-    let podaci = await rezultat0.json();
-    console.log(rezultat0);
-    console.log(rezultat1);
-    console.log(rezultat2);
+  methods: {
+    async getData() {
+      let podatci = await fetch("https://api.agify.io?name=" + this.ime);
+      let podatci2 = await fetch("https://api.genderize.io?name=" + this.ime);
+      let podatci3 = await fetch(
+        "https://api.nationalize.io?name=" + this.ime
+      );
+
+      let rezultati = await podatci.json();
+      let rezultati2 = await podatci2.json();
+      let rezultati3 = await podatci3.json();
+
+      let temp = {
+        ime: rezultati.ime,
+        godine: rezultati.age,
+        spol: rezultati.gender,
+        vjerojatnost: rezultati.probability,
+      };
+      this.items.push(temp);
+
+      console.log(rezultati);
+      console.log(rezultati2);
+      console.log(rezultati3);
+    },
   },
 };
 </script>
