@@ -26,7 +26,35 @@ export default {
       ime: "Loris",
       prezime: "Lukić",
       commits: [],
+      headers: [
+        {
+          text: "Ime",
+          align: "start",
+          sortable: false,
+          value: "ime",
+        },
+        {
+          text: "Vjerojatnost",
+          align: "start",
+          sortable: false,
+          value: "vjerojatnost",
+        },
+        {
+          text: "Godine",
+          align: "start",
+          sortable: true,
+          value: "godine",
+        },
+        {
+          text: "Spol",
+          align: "start",
+          sortable: false,
+          value: "spol",
+        },
+      ],
+
     };
+
   },
   async mounted() {
     let rezultat0 = await fetch("https://api.agify.io?name=michael");
